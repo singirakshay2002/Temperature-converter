@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .button-group button {
+            width: 48%;
+        }
+        
+        .center {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        button {
+            width: 50%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #339fe7f3;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #6ea6cce0;
+        }
+
+        .result {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Temperature Converter</h1>
+        <label for="celsius">Celsius:</label>
+        <input type="number" id="celsius" placeholder="Enter Celsius">
+        <br>
+        <label for="fahrenheit">Fahrenheit:</label>
+        <input type="number" id="fahrenheit" placeholder="Enter Fahrenheit">
+        <div class="button-group">
+            <button onclick="convertTemperature('celsius')">Convert to Fahrenheit</button>
+            <button onclick="convertTemperature('fahrenheit')">Convert to Celsius</button>
+        </div>
+        <div class="center">
+            <button type="button" onclick="clearAll()">Clear All</button>
+        </div>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function convertTemperature(unit) {
+            const celsiusInput = document.getElementById("celsius");
+            const fahrenheitInput = document.getElementById("fahrenheit");
+            const resultElement = document.getElementById("result");
+
+            if (unit === "celsius") {
+                if (celsiusInput.value !== "") {
+                    const celsiusValue = parseFloat(celsiusInput.value);
+                    const fahrenheitValue = (celsiusValue * 9/5) + 32;
+                    fahrenheitInput.value = fahrenheitValue.toFixed(2);
+                    resultElement.textContent = `${celsiusValue.toFixed(2)} Celsius is equal to ${fahrenheitValue.toFixed(2)} Fahrenheit.`;
+                } else {
+                    resultElement.textContent = "Please enter a Celsius value.";
+                }
+            } else if (unit === "fahrenheit") {
+                if (fahrenheitInput.value !== "") {
+                    const fahrenheitValue = parseFloat(fahrenheitInput.value);
+                    const celsiusValue = (fahrenheitValue - 32) * 5/9;
+                    celsiusInput.value = celsiusValue.toFixed(2);
+                    resultElement.textContent = `${fahrenheitValue.toFixed(2)} Fahrenheit is equal to ${celsiusValue.toFixed(2)} Celsius.`;
+                } else {
+                    resultElement.textContent = "Please enter a Fahrenheit value.";
+                }
+            }
+        }
+            function clearAll() {
+            const celsiusInput = document.getElementById("celsius");
+            const fahrenheitInput = document.getElementById("fahrenheit");
+            const resultElement = document.getElementById("result");
+
+            celsiusInput.value = "";
+            fahrenheitInput.value = "";
+            resultElement.textContent = "";
+        }
+    </script>
+</body>
+</html>
